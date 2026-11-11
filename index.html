@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anita Li 李舲熏 | 個人作品集與 Side Project 展示站</title>
+    <!-- 主題防閃爍腳本 (Theme Init Script) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white transition-colors duration-300 relative">
+
+    <!-- 頂部導覽列 -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- 品牌字標 -->
+            <a href="index.html" class="flex items-center gap-2.5 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+                    AL
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Anita Li 李舲熏</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono -mt-0.5">Agentic AI & Full-Stack</span>
+                </div>
+            </a>
+
+            <!-- 桌面版導覽連結 (md+) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#projects" class="hover:text-indigo-600 dark:hover:text-white transition-colors">精選專案 (Projects)</a>
+                <a href="#about" class="hover:text-indigo-600 dark:hover:text-white transition-colors">關於經歷 (About)</a>
+                <a href="#skills" class="hover:text-indigo-600 dark:hover:text-white transition-colors">技術技能 (Skills)</a>
+                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-white transition-colors">聯絡方式 (Contact)</a>
+            </nav>
+
+            <!-- 右側動作區：LinkedIn + 主題切換 -->
+            <div class="flex items-center gap-2.5">
+                <!-- LinkedIn 捷徑 -->
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80"
+                   title="Anita Li LinkedIn Profile" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                </a>
+
+                <!-- 亮色 / 暗色切換按鈕 -->
+                <button id="theme-toggle" type="button" 
+                        class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        title="切換亮色 / 暗色風格" aria-label="切換主題">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm text-amber-400 hidden"></i>
+                </button>
+
+                <!-- 手機版漢堡選單按鈕 (md:hidden) -->
+                <button id="mobile-menu-btn" type="button"
+                        class="md:hidden w-9 h-9 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        aria-label="開啟導覽選單" aria-expanded="false">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 (Mobile Navigation Drawer) -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg px-4 pt-3 pb-5 space-y-3 transition-all duration-300">
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <i class="fa-solid fa-diagram-project w-5 text-indigo-500"></i> 精選專案 (Projects)
+            </a>
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <i class="fa-solid fa-user-graduate w-5 text-indigo-500"></i> 關於經歷 (About)
+            </a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <i class="fa-solid fa-layer-group w-5 text-indigo-500"></i> 技術技能 (Skills)
+            </a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <i class="fa-solid fa-envelope w-5 text-indigo-500"></i> 聯絡方式 (Contact)
+            </a>
+            <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-medium">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn 主頁</span>
+                </a>
+                <a href="mailto:anita.tw88@gmail.com"
+                   class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-indigo-600 text-white text-xs font-medium shadow-md shadow-indigo-600/20">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>寄信給我</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主體內容 -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-28 overflow-hidden border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-300">
+            <!-- 背景裝飾光暈 -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/3 left-1/3 w-72 h-72 bg-purple-500/10 dark:bg-purple-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="max-w-3xl">
+                    <!-- 主標題 (風格 A) -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+                        Hi, I'm <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">Anita Li</span>.
+                        <span class="block text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-700 dark:text-slate-300 mt-3">
+                            專注於 Agentic AI 工作流與雲端微服務的全端工程師。
+                        </span>
+                    </h1>
+
+                    <!-- 副標題簡介 -->
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 font-normal">
+                        目前就讀於國立陽明交通大學資管所，具備台積電 IT 實習與 LINE 平台串接實戰經驗。專注於運用生成式 AI 代理（Agentic Workflow）重構複雜舊系統，並打造高效、可靠的 AWS 雲端全端解決方案。
+                    </p>
+
+                    <!-- 單一行動焦點按鈕 -->
+                    <div class="flex items-center gap-4">
+                        <a href="#projects" class="px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 inline-flex items-center gap-2 group">
+                            <span>瀏覽精選專案</span>
+                            <i class="fa-solid fa-arrow-down text-xs transform group-hover:translate-y-0.5 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 方案 A：關鍵實踐成效與量化指標 (具備過渡小標題) -->
+                <div class="mt-16 border-t border-slate-200 dark:border-slate-800/80 pt-10">
+                    <div class="mb-6">
+                        <div class="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1">Proven Track Record</div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">關鍵實踐成效與量化指標</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">重構效率躍升 (TSMC)</div>
+                            <div class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">75% <span class="text-xs font-normal text-slate-500 dark:text-slate-400">週期縮減</span></div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">企業 API 平台串接 (LINE)</div>
+                            <div class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">163+ <span class="text-xs font-normal text-slate-500 dark:text-slate-400">家平台</span></div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">全國競賽與大專生計畫</div>
+                            <div class="text-3xl font-bold text-amber-600 dark:text-amber-400">4+ <span class="text-xs font-normal text-slate-500 dark:text-slate-400">項大獎榮譽</span></div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">研究所學業成績 (NYCU)</div>
+                            <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">4.24 <span class="text-xs font-normal text-slate-500 dark:text-slate-400">/ 4.3 GPA</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 精選專案區塊 (Projects Section) -->
+        <section id="projects" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <div class="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Portfolio & Side Projects</div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">精選專案展示</h2>
+            </div>
+
+            <!-- 分類篩選標籤 (Category Filter Tabs) -->
+            <div class="flex flex-wrap items-center gap-2 mb-10 pb-2 border-b border-slate-200 dark:border-slate-800">
+                <button class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/20" data-filter="all">
+                    全部專案 (4)
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-transparent hover:text-slate-900 dark:hover:text-white" data-filter="agentic-ai">
+                    Agentic AI & DevOps (1)
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-transparent hover:text-slate-900 dark:hover:text-white" data-filter="cloud">
+                    Cloud & Architecture (1)
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-transparent hover:text-slate-900 dark:hover:text-white" data-filter="multimodal">
+                    Multimodal AI (1)
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-transparent hover:text-slate-900 dark:hover:text-white" data-filter="data">
+                    Data Analytics (1)
+                </button>
+            </div>
+
+            <!-- 專案卡片 Grid (嚴格依據 AGENTS.md 7.1 規格實作) -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- 專案卡片 1：Unified Agentic Skill -->
+                <article class="project-card group bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 hover:border-purple-500/50 rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-purple-500/10 flex flex-col justify-between"
+                         data-category="agentic-ai">
+                    <div>
+                        <!-- 類別與年份 -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">
+                                Agentic AI & DevOps
+                            </span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">2026.07 - 2026.08</span>
+                        </div>
+
+                        <!-- 專案標題 -->
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors mb-2">
+                            Unified Agentic Skill for Modernization
+                        </h3>
+
+                        <!-- 簡介 -->
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                            針對台積電具 10 年歷史的 Early Prewarning 製程交期系統（GWT + EJB），結合 Agentic AI 與 Git Submodule 打造全端自動化重構工作流（Next.js + Spring Boot）。
+                        </p>
+
+                        <!-- 成效亮點 Callout -->
+                        <div class="bg-slate-50 dark:bg-slate-900/70 rounded-xl p-3.5 mb-5 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-500 dark:text-slate-400">介面重構開發週期</span>
+                            <span class="text-emerald-600 dark:text-emerald-400 font-bold">20天 → 5天 (縮短 75%)</span>
+                        </div>
+
+                        <!-- 技術標籤 -->
+                        <div class="flex flex-wrap gap-1.5 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Agentic AI</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Next.js</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Spring Boot</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Git Submodule</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Subagents</span>
+                        </div>
+                    </div>
+
+                    <!-- 詳情按鈕 -->
+                    <a href="projects/01-agentic-modernization.html" 
+                       class="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200 dark:border-slate-700/60 text-sm font-medium text-purple-600 dark:text-purple-400 group-hover:text-purple-500">
+                        <span>閱讀完整專案技術報告</span>
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </article>
+
+                <!-- 專案卡片 2：AWS 智慧餐廳推薦系統 -->
+                <article class="project-card group bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 hover:border-blue-500/50 rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
+                         data-category="cloud">
+                    <div>
+                        <!-- 類別與年份 -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20">
+                                Cloud & Architecture
+                            </span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">2026</span>
+                        </div>
+
+                        <!-- 專案標題 -->
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors mb-2">
+                            個人化智慧餐廳推薦系統
+                        </h3>
+
+                        <!-- 簡介 -->
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                            基於 AWS Serverless 與 Amazon Bedrock 生成式 AI 模型（Nova Micro），打造支援自然語言探索、個人化排序、互動式 Google 地圖導航與週報訂閱的美食探索系統。
+                        </p>
+
+                        <!-- 成效亮點 Callout -->
+                        <div class="bg-slate-50 dark:bg-slate-900/70 rounded-xl p-3.5 mb-5 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-500 dark:text-slate-400">雲端伺服器架構</span>
+                            <span class="text-blue-600 dark:text-blue-400 font-bold">100% Serverless (Lambda + DynamoDB)</span>
+                        </div>
+
+                        <!-- 技術標籤 -->
+                        <div class="flex flex-wrap gap-1.5 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Amazon Bedrock</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">AWS Lambda</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">DynamoDB</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">S3 / CloudFront</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Google Maps API</span>
+                        </div>
+                    </div>
+
+                    <!-- 詳情按鈕 -->
+                    <a href="projects/02-aws-restaurant-rec.html" 
+                       class="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200 dark:border-slate-700/60 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-500">
+                        <span>閱讀完整專案技術報告</span>
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </article>
+
+                <!-- 專案卡片 3：ADAM 多模態滿意度分析系統 -->
+                <article class="project-card group bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 hover:border-emerald-500/50 rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 flex flex-col justify-between"
+                         data-category="multimodal">
+                    <div>
+                        <!-- 類別與年份 -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
+                                Multimodal AI
+                            </span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">2024 - 2025</span>
+                        </div>
+
+                        <!-- 專案標題 -->
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors mb-2">
+                            ADAM 多模態服務業滿意度及績效分析系統
+                        </h3>
+
+                        <!-- 簡介 -->
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                            針對文本、語音與臉部表情之多模態資料進行即時服務滿意度與員工績效分析，藉由 AI 自動生成改善建議與決策報表，榮獲臺灣數創大賞銀獎與 U-start 計畫肯定。
+                        </p>
+
+                        <!-- 成效亮點 Callout -->
+                        <div class="bg-slate-50 dark:bg-slate-900/70 rounded-xl p-3.5 mb-5 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-500 dark:text-slate-400">競賽獲獎榮譽</span>
+                            <span class="text-amber-600 dark:text-amber-400 font-bold">臺灣數創大賞 銀獎 / U-start 計畫</span>
+                        </div>
+
+                        <!-- 技術標籤 -->
+                        <div class="flex flex-wrap gap-1.5 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Python 3.12</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">TensorFlow</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">deepFace</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Hugging Face</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Qt / BeeWare</span>
+                        </div>
+                    </div>
+
+                    <!-- 詳情按鈕 -->
+                    <a href="projects/03-adam-multimodal-analytics.html" 
+                       class="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200 dark:border-slate-700/60 text-sm font-medium text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-500">
+                        <span>閱讀完整專案技術報告</span>
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </article>
+
+                <!-- 專案卡片 4：航港兩岸航線貿易預測 -->
+                <article class="project-card group bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 hover:border-amber-500/50 rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between"
+                         data-category="data">
+                    <div>
+                        <!-- 類別與年份 -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
+                                Data Analytics
+                            </span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">2024</span>
+                        </div>
+
+                        <!-- 專案標題 -->
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors mb-2">
+                            以時間序列分析兩岸航線貿易
+                        </h3>
+
+                        <!-- 簡介 -->
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                            針對 iMarine 航港發展資料庫 2016–2024 年兩岸航線貨櫃數據，運用 SARIMA 時間序列模型預測季節趨勢，並透過 Power BI 打造互動決策儀表板，榮獲全國航港大數據競賽佳作。
+                        </p>
+
+                        <!-- 成效亮點 Callout -->
+                        <div class="bg-slate-50 dark:bg-slate-900/70 rounded-xl p-3.5 mb-5 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-500 dark:text-slate-400">大數據競賽獲獎</span>
+                            <span class="text-amber-600 dark:text-amber-300 font-bold">第四屆航港大數據應用競賽 佳作</span>
+                        </div>
+
+                        <!-- 技術標籤 -->
+                        <div class="flex flex-wrap gap-1.5 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Python</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">SARIMA 模型</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Power BI</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">Matplotlib</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-mono">iMarine 資料庫</span>
+                        </div>
+                    </div>
+
+                    <!-- 詳情按鈕 -->
+                    <a href="projects/04-trade-timeseries-forecasting.html" 
+                       class="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200 dark:border-slate-700/60 text-sm font-medium text-amber-600 dark:text-amber-400 group-hover:text-amber-500">
+                        <span>閱讀完整專案技術報告</span>
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 關於經歷 (About Section) -->
+        <section id="about" class="py-20 bg-slate-100/70 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mb-12">
+                    <div class="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Background & Experience</div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">學術背景與專業經歷</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- 教育背景 -->
+                    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/70 rounded-2xl p-7 space-y-6 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-graduation-cap text-indigo-600 dark:text-indigo-400"></i>
+                            <span>教育背景 (Education)</span>
+                        </h3>
+
+                        <!-- NYCU -->
+                        <div class="border-l-2 border-indigo-500 pl-4 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">國立陽明交通大學 資訊管理研究所</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2025.09 - 2027.06</span>
+                            </div>
+                            <div class="text-xs text-indigo-600 dark:text-indigo-300 font-mono">GPA: 4.24 / 4.3 • DB LAB 資料庫與資訊系統實驗室（指導教授：劉敦仁）</div>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm pt-1">
+                                研究方向：生成式推薦系統、資料探勘、機器學習。修習《生成式人工智慧》、《分散式系統》、《雲端計算理論與實務》。
+                            </p>
+                        </div>
+
+                        <!-- NCU -->
+                        <div class="border-l-2 border-slate-300 dark:border-slate-600 pl-4 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">國立中央大學 資訊管理學系</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2021.09 - 2025.06</span>
+                            </div>
+                            <div class="text-xs text-slate-700 dark:text-slate-300 font-mono">GPA: 4.17 / 4.3 • 連續榮獲院長獎與書卷獎</div>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm pt-1">
+                                榮獲 111、112 學年度管理學院院長獎、四度榮獲學業成績優良書卷獎、優秀學生獎學金。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 工作與實習經歷 -->
+                    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/70 rounded-2xl p-7 space-y-6 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-briefcase text-purple-600 dark:text-purple-400"></i>
+                            <span>實習與組織經歷 (Experience)</span>
+                        </h3>
+
+                        <!-- TSMC -->
+                        <div class="border-l-2 border-purple-500 pl-4 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">TSMC 台灣積體電路製造</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2026.07 - 2026.08</span>
+                            </div>
+                            <div class="text-xs text-purple-600 dark:text-purple-300 font-mono">IT Intern (BSID SCPM)</div>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm pt-1">
+                                負責製程交期系統前後端重構（Next.js + Spring Boot），導入 Superpowers Workflow 與 Git Submodule，開發 Subagent 自動化代碼解析腳本。
+                            </p>
+                        </div>
+
+                        <!-- LINE (已依據履歷表更新職責) -->
+                        <div class="border-l-2 border-slate-300 dark:border-slate-600 pl-4 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">LINE Taiwan</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2024.07 - 2025.06</span>
+                            </div>
+                            <div class="text-xs text-slate-700 dark:text-slate-300 font-mono">Platform Management Intern (LINE EC 電商部門)</div>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm pt-1">
+                                負責 LINE 購物合作商家 API 平台串接與系統整合、商品資料格式標準化及跨部門專案進度管理。任期內成功完成 163 間合作商家串接，產出 12 份中英文技術規格文件，並深入參與顧客客訴數據分析專案。
+                            </p>
+                        </div>
+
+                        <!-- Leadership -->
+                        <div class="border-l-2 border-slate-300 dark:border-slate-600 pl-4 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">TEDxNCU & 新創團隊領導</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2023 - 2025</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm pt-1">
+                                擔任 TEDxNCU 社長兼策展組長；擔任 ADAM 新創團隊財務長（CFO），榮獲教育部 U-start 創新創業計畫肯定。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技術技能清單 (Skills Section - 4 大標準支柱重構) -->
+        <section id="skills" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Technical Toolset</div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">核心技術與專業能力</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 1. 程式語言 -->
+                <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">程式語言</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">演算法邏輯與代碼基礎</p>
+                    <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Python</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Java</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">JavaScript</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">SQL</span>
+                    </div>
+                </div>
+
+                <!-- 2. 前端與後端架構 -->
+                <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">前端與後端架構</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">應用層開發與工程工作流</p>
+                    <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Next.js</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Spring Boot</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Flask</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">HTML</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">CSS</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Git / CI/CD</span>
+                    </div>
+                </div>
+
+                <!-- 3. AI 與雲端架構 -->
+                <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">AI 與雲端架構</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">智能代理與無伺服器微服務</p>
+                    <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Agentic AI</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">AWS Bedrock</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Lambda</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Hugging Face</span>
+                    </div>
+                </div>
+
+                <!-- 4. 資料庫與數據分析 -->
+                <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">資料庫與數據分析</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">資料持久化與商業情報洞察</p>
+                    <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">MySQL</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">MariaDB</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">DynamoDB</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Power BI</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200">Matplotlib</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡方式區塊 (Contact Section) -->
+        <section id="contact" class="py-20 bg-slate-100/70 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 text-indigo-700 dark:text-indigo-400 text-xs font-mono mb-4">
+                    <span>Get in Touch</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">期待與優秀的團隊交流合作</h2>
+                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8">
+                    無論是關於 Agentic AI 落地應用、全端重構交流、或是職缺機會，歡迎隨時透過 LinkedIn 或 Email 與我聯繫！
+                </p>
+
+                <!-- 聯絡按鈕群 -->
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <!-- LinkedIn 按鈕 -->
+                    <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                       class="h-12 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/30 inline-flex items-center justify-center gap-2.5">
+                        <i class="fa-brands fa-linkedin text-base"></i>
+                        <span>LinkedIn 個人主頁</span>
+                    </a>
+
+                    <!-- Email 按鈕 -->
+                    <a href="mailto:anita.tw88@gmail.com" 
+                       class="h-12 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 inline-flex items-center justify-center gap-2.5">
+                        <i class="fa-solid fa-envelope text-base"></i>
+                        <span>anita.tw88@gmail.com</span>
+                    </a>
+
+                    <!-- GitHub 個人主頁 -->
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                       class="h-12 px-6 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-all shadow-sm inline-flex items-center justify-center gap-2.5">
+                        <i class="fa-brands fa-github text-base"></i>
+                        <span>GitHub 個人主頁</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-950 text-center text-xs text-slate-500 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            © 2026 Anita Li (李舲熏). All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- 懸浮返回頂部按鈕 (Floating Scroll-to-Top Button) -->
+    <button id="scroll-to-top" type="button"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none focus:outline-none hover:scale-105"
+            title="返回頂部" aria-label="返回頂部">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+    <!-- 互動邏輯腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 主題切換邏輯 (Theme Toggle Logic)
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateThemeIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            updateThemeIcons();
+
+            themeToggleBtn.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateThemeIcons();
+            });
+
+            // 2. 手機版漢堡選單開關 (Mobile Hamburger Menu)
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function toggleMobileMenu() {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuIcon.classList.remove('fa-xmark');
+                    mobileMenuIcon.classList.add('fa-bars');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    mobileMenuIcon.classList.remove('fa-bars');
+                    mobileMenuIcon.classList.add('fa-xmark');
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuIcon.classList.remove('fa-xmark');
+                    mobileMenuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // 3. 懸浮返回頂部按鈕邏輯 (Scroll to Top)
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    scrollToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // 4. 分類篩選邏輯 (Category Filter Logic)
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/20');
+                        b.classList.add('bg-white', 'dark:bg-slate-800/80', 'text-slate-600', 'dark:text-slate-400');
+                    });
+                    btn.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/20');
+                    btn.classList.remove('bg-white', 'dark:bg-slate-800/80', 'text-slate-600', 'dark:text-slate-400');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        if (filterValue === 'all' || category === filterValue) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

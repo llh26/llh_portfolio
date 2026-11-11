@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <!-- 主題防閃爍腳本 (Theme Init Script) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Agentic Skill for Modernization | Anita Li 作品集</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="../index.html" class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm font-medium">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回作品集首頁</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <!-- LinkedIn 連結 -->
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80"
+                   title="Anita Li LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                </a>
+
+                <!-- 主題切換按鈕 -->
+                <button id="theme-toggle" type="button" 
+                        class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        title="切換亮色 / 暗色風格" aria-label="切換主題">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm text-amber-400 hidden"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    專案報告 01
+                </span>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+
+        <!-- 專案 Hero 區塊 -->
+        <header class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                    Agentic AI & DevOps
+                </span>
+                <span class="text-sm font-mono text-slate-400">
+                    <i class="fa-regular fa-calendar-days mr-1"></i> 2026.07 - 2026.08
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+                Unified Agentic Skill for Full-Stack Generation and Modernization
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl font-normal">
+                針對具 10 年歷史之 Early Prewarning 製程交期系統 (GWT + EJB)，結合 Agentic AI 與 Git Submodule 打造全端自動化重構工作流 (Next.js + Spring Boot)。
+            </p>
+
+            <!-- 關鍵指標橫條 -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">介面翻新時間</div>
+                    <div class="text-2xl font-bold text-emerald-400 mt-1">20天 → 5天</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">新功能開發速度</div>
+                    <div class="text-2xl font-bold text-indigo-400 mt-1">平均 2 天/介面</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">人為介入比例</div>
+                    <div class="text-2xl font-bold text-purple-400 mt-1">降至 30%</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">協同管理 Repo</div>
+                    <div class="text-2xl font-bold text-amber-400 mt-1">3 個 Repo</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 雙欄版面 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- 側邊規格速查卡片 -->
+            <aside class="lg:col-span-1 order-1 lg:order-1">
+                <div class="sticky top-24 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm dark:shadow-xl space-y-6">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs border-b border-slate-200 dark:border-slate-700 pb-3">
+                        專案規格速覽 (Specifications)
+                    </h2>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">我的角色 (My Role)</div>
+                        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">IT Intern (BSID SCPM)</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">所屬單位 / 機構</div>
+                        <div class="text-sm text-slate-800 dark:text-slate-200">TSMC 台灣積體電路製造</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-2">核心技術棧 (Tech Stack)</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Agentic AI</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Next.js</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Spring Boot</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Superpowers Workflow</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Git Submodule</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">TDD / Code Review</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">專案亮點成果</div>
+                        <div class="text-sm text-emerald-300 font-medium">翻新效率提升 75%、人為介入降至 30% 並專注於 Code Review</div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200 dark:border-slate-700/80 space-y-2">
+                        <div class="text-xs text-slate-400 leading-relaxed">
+                            <i class="fa-solid fa-lock mr-1 text-slate-500"></i>
+                            本專案為實習企業內部機密專案，已脫敏處理技術架構與工程流程呈現。
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 核心章節詳細內容 -->
+            <article class="lg:col-span-2 order-2 lg:order-2 space-y-12">
+
+                <!-- 章節 1：專案背景與痛點 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">01</span>
+                        <span>專案背景與核心挑戰 (Context & Problem)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            台積電內部的 <strong>Early Prewarning 製程交期系統</strong> 已穩定運行超過 10 年，底層採用早期的 GWT（Google Web Toolkit）與 EJB（Enterprise JavaBeans）架構。隨著業務規模與即時性需求爆發，系統亟需重構成現代化的前後端分離架構（<strong>Next.js + Spring Boot</strong>）。
+                        </p>
+                        <p>
+                            在過往的重構過程中，工程團隊面臨兩大瓶頸：
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-300 pl-2">
+                            <li><strong>舊系統程式碼極其龐雜且關聯複雜</strong>：傳統人工逐行研讀 GWT/EJB 邏輯費時費力，單一介面翻新平均需耗時 20 天。</li>
+                            <li><strong>通用 AI 生成品質不穩定且提詞冗餘</strong>：工程師直接與 AI Agent 對話時，AI 缺乏新系統整體架構上下文，經常產生邏輯幻覺，且工程師需重複輸入大量架構規則與背景提示詞。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 章節 2：系統架構與技術方案 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">02</span>
+                        <span>系統架構與工程設計 (System Architecture)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            為了突破瓶頸，我們設計了 <strong>Unified Agentic Skill 流程</strong>，導入 <code>Git Submodule</code> 將 3 個獨立 Repository（舊框架 <code>ATP-PREWARN</code>、新前端 <code>ESCM-PWFE</code>、新後端 <code>ESCM-PWBE</code>）統整於單一 AI 協作環境中，並建立自動化腳本工作流。
+                        </p>
+                        <div class="bg-slate-100 dark:bg-slate-900/80 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 font-mono text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-3">
+                            <div class="text-indigo-400 font-bold">// 跨 Repo Agentic 自動化重構工作流</div>
+                            <div>1. <strong>PRD / 舊代碼輸入</strong>：輸入需求文字或 ATP-PREWARN 舊代碼檔案</div>
+                            <div>2. <strong>/spec-generator 自動解析</strong>：派發特定領域 Subagent 分別剖析 GWT 元件與 EJB 邏輯</div>
+                            <div>3. <strong>讀取新框架快取知識庫</strong>：自動映射 <code>gwt-to-nextjs.md</code> 與 <code>ejb-to-spring.md</code> 轉換規則</div>
+                            <div>4. <strong>產出標準化 spec.md</strong>：包含功能規格書與可執行的 <code>test-strategy.md</code> 測試策略</div>
+                            <div>5. <strong>驅動全端生成</strong>：透過 Subagent-Driven Development 進行 Next.js 與 Spring Boot 代碼實作與自動測試</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 3：關鍵亮點與功能特色 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">03</span>
+                        <span>關鍵功能與工程亮點 (Key Highlights)</span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-robot text-purple-400 text-sm"></i>
+                                <span>專門化 Subagent 解析機制</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                設計前端與後端分工的 Subagent Checklists，針對舊框架 GWT 與 EJB 進行語法與邏輯特徵提取，將分析結果格式化為統一欄位的分析報告。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-file-code text-indigo-400 text-sm"></i>
+                                <span>提詞架構優化與架構快取</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                將 Next.js 元件清單、Spring Boot API 命名慣例、目錄規範預載入腳本，消弭 AI 探索上下文的重複 Prompt，保證生成的代碼符合企業團隊規範。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-vial-circle-check text-emerald-400 text-sm"></i>
+                                <span>規格附帶 TDD 測試規劃</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                透過 <code>output-template.md</code> 與 <code>test-strategy.md</code>，讓產出的 spec.md 同時具備可自動化執行的測試案例規劃，先寫測試再生成代碼。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-code-branch text-cyan-400 text-sm"></i>
+                                <span>Git Submodule 跨 Repo 協同</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                解決前後端分離與舊專案跨 Repo 協同痛點，工程師與 AI 可以在單一整合視窗中執行端到端的重構與驗證。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 4：具體成效與數據驗證 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">04</span>
+                        <span>成效指標與量化表現 (Impact & Verification)</span>
+                    </h2>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">大幅縮減介面重構開發週期：</strong>
+                                翻新單一大型交期系統介面的工期由原先的 20 天銳減至 5 天，工作效率躍升 75%。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">新功能開發極速落地：</strong>
+                                成功完成 4 個全新功能介面開發，平均單一介面僅需 2 天即可完成規格產出、前端建構與後端 API 對齊。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">工程團隊精力高價值化：</strong>
+                                人為介入比例大幅降至 30%，工程師不再深陷於搬移與除錯舊程式碼的泥淖，而是將專注力轉移至高品質的 Code Review 與邊界情境測試。
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                
+
+            </article>
+
+        </div>
+
+    </main>
+
+        <!-- 頁尾 -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-950 text-center text-xs text-slate-500 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            © 2026 Anita Li (李舲熏). All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- 懸浮返回頂部按鈕 -->
+    <button id="scroll-to-top" type="button"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none focus:outline-none hover:scale-105"
+            title="返回頂部" aria-label="返回頂部">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+
+    <!-- 主題切換腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateThemeIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            if (themeToggleBtn) {
+                            // 懸浮返回頂部按鈕邏輯
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        scrollToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+                updateThemeIcons();
+                themeToggleBtn.addEventListener('click', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    updateThemeIcons();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

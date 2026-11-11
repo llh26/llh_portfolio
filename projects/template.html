@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <!-- 主題防閃爍腳本 (Theme Init Script) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PROJECT_TITLE}} | Anita Li 作品集</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 自訂細節平滑滾動與字體 */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="../index.html" class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm font-medium">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回作品集首頁</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <!-- LinkedIn 連結 -->
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80"
+                   title="Anita Li LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                </a>
+
+                <!-- 主題切換按鈕 -->
+                <button id="theme-toggle" type="button" 
+                        class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        title="切換亮色 / 暗色風格" aria-label="切換主題">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm text-amber-400 hidden"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    專案報告
+                </span>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+
+        <!-- 專案 Hero 區塊 -->
+        <header class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <!-- 類別標籤（請依 AGENTS.md 4.2 規範配置顏色） -->
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                    {{CATEGORY_BADGE}}
+                </span>
+                <span class="text-sm font-mono text-slate-400">
+                    <i class="fa-regular fa-calendar-days mr-1"></i> {{TIMELINE}}
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+                {{PROJECT_TITLE}}
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl font-normal">
+                {{PROJECT_SUBTITLE}}
+            </p>
+
+            <!-- 關鍵指標橫條 (KPI Highlights) -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">{{KPI_1_LABEL}}</div>
+                    <div class="text-2xl font-bold text-indigo-400 mt-1">{{KPI_1_VALUE}}</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">{{KPI_2_LABEL}}</div>
+                    <div class="text-2xl font-bold text-emerald-400 mt-1">{{KPI_2_VALUE}}</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">{{KPI_3_LABEL}}</div>
+                    <div class="text-2xl font-bold text-purple-400 mt-1">{{KPI_3_VALUE}}</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">{{KPI_4_LABEL}}</div>
+                    <div class="text-2xl font-bold text-amber-400 mt-1">{{KPI_4_VALUE}}</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 雙欄版面：主內容 + 側邊規格欄 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- 左側/上方：側邊規格速查卡片 (Metadata Card) -->
+            <aside class="lg:col-span-1 order-1 lg:order-1">
+                <div class="sticky top-24 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm dark:shadow-xl space-y-6">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs border-b border-slate-200 dark:border-slate-700 pb-3">
+                        專案規格速覽 (Specifications)
+                    </h2>
+
+                    <!-- 角色與貢獻 -->
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">我的角色 (My Role)</div>
+                        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">{{MY_ROLE}}</div>
+                    </div>
+
+                    <!-- 組織/合作單位 -->
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">所屬單位 / 機構</div>
+                        <div class="text-sm text-slate-800 dark:text-slate-200">{{ORGANIZATION}}</div>
+                    </div>
+
+                    <!-- 技術堆疊 -->
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-2">核心技術棧 (Tech Stack)</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <!-- 請依專案填入技術標籤 -->
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">{{TECH_1}}</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">{{TECH_2}}</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">{{TECH_3}}</span>
+                        </div>
+                    </div>
+
+                    <!-- 專案成果與獲獎 -->
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">獲獎或競賽榮譽</div>
+                        <div class="text-sm text-amber-300 font-medium">{{AWARDS}}</div>
+                    </div>
+
+                    <!-- 外部連結 -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-slate-700/80 space-y-2">
+                        <a href="{{DEMO_OR_REPO_URL}}" target="_blank" rel="noopener noreferrer" 
+                           class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-lg shadow-indigo-600/30">
+                            <i class="fa-brands fa-github"></i>
+                            <span>檢視程式碼 / 簡報</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側/下方：核心章節詳細內容 (Main Content) -->
+            <article class="lg:col-span-2 order-2 lg:order-2 space-y-12">
+
+                <!-- 章節 1：專案背景與痛點 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">01</span>
+                        <span>專案背景與核心挑戰 (Context & Problem)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>{{PROBLEM_DESCRIPTION_P1}}</p>
+                        <p>{{PROBLEM_DESCRIPTION_P2}}</p>
+                    </div>
+                </section>
+
+                <!-- 章節 2：系統架構與技術方案 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">02</span>
+                        <span>系統架構與工程設計 (System Architecture)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>{{ARCHITECTURE_DESCRIPTION}}</p>
+                        <!-- 架構流程圖或要點列表 -->
+                        <div class="bg-slate-100 dark:bg-slate-900/80 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 font-mono text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+                            <div class="text-indigo-400 font-bold mb-2">// 核心工作流解析</div>
+                            <div>• {{WORKFLOW_STEP_1}}</div>
+                            <div>• {{WORKFLOW_STEP_2}}</div>
+                            <div>• {{WORKFLOW_STEP_3}}</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 3：關鍵亮點與功能特色 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">03</span>
+                        <span>關鍵功能與工程亮點 (Key Highlights)</span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-indigo-400 text-sm"></i>
+                                <span>{{FEATURE_1_TITLE}}</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{{FEATURE_1_DESC}}</p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-code text-indigo-400 text-sm"></i>
+                                <span>{{FEATURE_2_TITLE}}</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{{FEATURE_2_DESC}}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 4：具體成效與數據驗證 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-mono">04</span>
+                        <span>成效指標與量化表現 (Impact & Verification)</span>
+                    </h2>
+                    <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <span>{{IMPACT_POINT_1}}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <span>{{IMPACT_POINT_2}}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <span>{{IMPACT_POINT_3}}</span>
+                        </li>
+                    </ul>
+                </section>
+
+                
+
+            </article>
+
+        </div>
+
+    </main>
+
+        <!-- 頁尾 -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-950 text-center text-xs text-slate-500 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            © 2026 Anita Li (李舲熏). All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- 懸浮返回頂部按鈕 -->
+    <button id="scroll-to-top" type="button"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none focus:outline-none hover:scale-105"
+            title="返回頂部" aria-label="返回頂部">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+
+    <!-- 主題切換腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateThemeIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            if (themeToggleBtn) {
+                            // 懸浮返回頂部按鈕邏輯
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        scrollToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+                updateThemeIcons();
+                themeToggleBtn.addEventListener('click', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    updateThemeIcons();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

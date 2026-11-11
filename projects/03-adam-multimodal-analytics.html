@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <!-- 主題防閃爍腳本 (Theme Init Script) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADAM 多模態服務業滿意度及績效分析系統 | Anita Li 作品集</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="../index.html" class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm font-medium">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回作品集首頁</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <!-- LinkedIn 連結 -->
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80"
+                   title="Anita Li LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                </a>
+
+                <!-- 主題切換按鈕 -->
+                <button id="theme-toggle" type="button" 
+                        class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        title="切換亮色 / 暗色風格" aria-label="切換主題">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm text-amber-400 hidden"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    專案報告 03
+                </span>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+
+        <!-- 專案 Hero 區塊 -->
+        <header class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    Multimodal AI
+                </span>
+                <span class="text-sm font-mono text-slate-400">
+                    <i class="fa-regular fa-calendar-days mr-1"></i> 2024 - 2025
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+                ADAM 多模態模型服務業滿意度及績效分析系統
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl font-normal">
+                針對文本、語音與臉部表情之多模態資料進行即時服務滿意度與員工績效分析，藉由 AI 自動生成改善建議與決策報表，榮獲臺灣數創大賞銀獎與 U-start 計畫肯定。
+            </p>
+
+            <!-- 關鍵指標橫條 -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">2024 臺灣數創大賞</div>
+                    <div class="text-2xl font-bold text-amber-300 mt-1">智慧+組 銀獎</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">教育部創新創業</div>
+                    <div class="text-2xl font-bold text-emerald-400 mt-1">U-start 計畫獲選</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">國家科學委員會</div>
+                    <div class="text-2xl font-bold text-indigo-400 mt-1">大專生研究計畫</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">2025 智慧創新大賞</div>
+                    <div class="text-2xl font-bold text-purple-400 mt-1">AI 應用組 佳作</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 雙欄版面 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- 側邊規格速查卡片 -->
+            <aside class="lg:col-span-1 order-1 lg:order-1">
+                <div class="sticky top-24 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm dark:shadow-xl space-y-6">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs border-b border-slate-200 dark:border-slate-700 pb-3">
+                        專案規格速覽 (Specifications)
+                    </h2>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">我的角色 (My Role)</div>
+                        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">語音情緒演算法工程師 & CFO</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">所屬單位 / 團隊</div>
+                        <div class="text-sm text-slate-800 dark:text-slate-200">國立中央大學資管系 / ADAM 團隊</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-2">核心技術棧 (Tech Stack)</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Python 3.12</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">TensorFlow</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">deepFace</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Hugging Face</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Flask & TWCC</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Qt / QML</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">主要獲獎認證</div>
+                        <div class="text-sm text-amber-300 font-medium">臺灣數創大賞銀獎、千里馬創業競賽潛力獎、智慧創新大賞佳作</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 核心章節詳細內容 -->
+            <article class="lg:col-span-2 order-2 lg:order-2 space-y-12">
+
+                <!-- 章節 1：專案背景與痛點 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-mono">01</span>
+                        <span>專案背景與核心挑戰 (Context & Problem)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            服務業（如餐飲門市、金融櫃檯、客服中心）長期面臨顧客體驗評估延遲、主管巡檢覆蓋率低、傳統滿意度問卷回收率不足且存在極端評價偏差等痛點。
+                        </p>
+                        <p>
+                            傳統單一文字分析無法準確捕捉互動時的語調波動與真實臉部微表情。ADAM 專案旨在打造一套**多模態（Multimodal）即時分析系統**，融合「語音語調」、「人臉微表情」與「文本語意」，提供客觀且具備即時改善建議的績效分析指標。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 章節 2：系統架構與技術方案 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-mono">02</span>
+                        <span>系統架構與工程設計 (System Architecture)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            系統涵蓋前端客戶端、TWCC 雲端高速運算節點以及多模態模型推論管線：
+                        </p>
+                        <div class="bg-slate-100 dark:bg-slate-900/80 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 font-mono text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-3">
+                            <div class="text-emerald-400 font-bold">// 多模態推論管線與後端架構</div>
+                            <div>• <strong>跨平台前端</strong>：採用 Python BeeWare 與 Qt/QML 打包為 macOS (DMG) 與 Windows (MSI) 原生應用。</div>
+                            <div>• <strong>音訊特徵工程</strong>：提取語音頻譜特徵（MFCCs），過濾背景環境噪音，分類正向/中立/負向語調情緒。</div>
+                            <div>• <strong>臉部表情辨識</strong>：透過 deepFace 與 TensorFlow 進行店員與顧客的面部情緒分類。</div>
+                            <div>• <strong>文本與報告生成</strong>：結合 Hugging Face 模型與 ChatGPT API，整合三方情緒加權，產出每日店長管理週報與具體建議。</div>
+                            <div>• <strong>雲端基礎設施</strong>：運算部署於 TWCC 臺灣 AI 雲高速運算平台，搭配 Google Cloud Storage 與 MySQL 資料庫。</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 3：關鍵亮點與功能特色 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-mono">03</span>
+                        <span>關鍵功能與工程亮點 (Key Highlights)</span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-microphone-lines text-emerald-400 text-sm"></i>
+                                <span>語音情緒前處理與特徵提取</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                針對吵雜門市環境建立音訊清洗與切片標準流程，準確分離店員與顧客音軌，進行特徵對齊。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-indigo-400 text-sm"></i>
+                                <span>直覺可讀之情緒視覺化圖表</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                使用 Matplotlib 將多維度情緒轉化為正向、中立、負向隨時間分佈的折線與熱力圖，輔助主管直觀發現服務瓶頸時段。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 4：具體成效與競賽榮譽 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-mono">04</span>
+                        <span>成效指標與量化表現 (Impact & Verification)</span>
+                    </h2>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-trophy text-amber-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">全國競賽大獎肯定：</strong>
+                                榮獲 2024 臺灣數創大賞智慧+組「銀獎」、2024 新創千里馬創業競賽潛力獎、2025 智慧創新大賞學生組「佳作」。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-medal text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">教育部與國科會雙重補助：</strong>
+                                入選 113 年度國科會大專學生研究計畫，並獲得教育部 114 年度 U-start 創新創業計畫第一階段獲選團隊。
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                
+
+            </article>
+
+        </div>
+
+    </main>
+
+        <!-- 頁尾 -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-950 text-center text-xs text-slate-500 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            © 2026 Anita Li (李舲熏). All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- 懸浮返回頂部按鈕 -->
+    <button id="scroll-to-top" type="button"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none focus:outline-none hover:scale-105"
+            title="返回頂部" aria-label="返回頂部">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+
+    <!-- 主題切換腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateThemeIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            if (themeToggleBtn) {
+                            // 懸浮返回頂部按鈕邏輯
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        scrollToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+                updateThemeIcons();
+                themeToggleBtn.addEventListener('click', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    updateThemeIcons();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

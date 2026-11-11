@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <!-- 主題防閃爍腳本 (Theme Init Script) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人化智慧餐廳推薦系統 | Anita Li 作品集</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="../index.html" class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm font-medium">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回作品集首頁</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <!-- LinkedIn 連結 -->
+                <a href="https://www.linkedin.com/in/llh26" target="_blank" rel="noopener noreferrer"
+                   class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80"
+                   title="Anita Li LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                </a>
+
+                <!-- 主題切換按鈕 -->
+                <button id="theme-toggle" type="button" 
+                        class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/80 focus:outline-none"
+                        title="切換亮色 / 暗色風格" aria-label="切換主題">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm text-amber-400 hidden"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    專案報告 02
+                </span>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+
+        <!-- 專案 Hero 區塊 -->
+        <header class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    Cloud & Architecture
+                </span>
+                <span class="text-sm font-mono text-slate-400">
+                    <i class="fa-regular fa-calendar-days mr-1"></i> 2026
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+                個人化智慧餐廳推薦系統
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl font-normal">
+                基於 AWS Serverless 與 Amazon Bedrock 生成式 AI 模型（Nova Micro），打造支援自然語言探索、個人化排序、互動式 Google 地圖導航與週報訂閱的美食探索系統。
+            </p>
+
+            <!-- 關鍵指標橫條 -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">雲端系統架構</div>
+                    <div class="text-2xl font-bold text-blue-400 mt-1">100% Serverless</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">生成式 AI 模型</div>
+                    <div class="text-2xl font-bold text-indigo-400 mt-1">Amazon Bedrock</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">地圖即時連動</div>
+                    <div class="text-2xl font-bold text-emerald-400 mt-1">Google Maps API</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">前端傳遞效能</div>
+                    <div class="text-2xl font-bold text-amber-400 mt-1">S3 + CloudFront</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 雙欄版面 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- 側邊規格速查卡片 -->
+            <aside class="lg:col-span-1 order-1 lg:order-1">
+                <div class="sticky top-24 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm dark:shadow-xl space-y-6">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs border-b border-slate-200 dark:border-slate-700 pb-3">
+                        專案規格速覽 (Specifications)
+                    </h2>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">我的角色 (My Role)</div>
+                        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">前端工程師 & UX 設計師</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">專案性質 / 所屬單位</div>
+                        <div class="text-sm text-slate-800 dark:text-slate-200">AWS Cloud Builder 實戰專案</div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-2">核心技術棧 (Tech Stack)</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Amazon Bedrock</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">AWS Lambda</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">DynamoDB</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">S3 & CloudFront</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Google Maps API</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-800 dark:text-slate-200 font-mono">Amazon SNS/SES</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-1">關鍵工程亮點</div>
+                        <div class="text-sm text-blue-300 font-medium">實現自然語言問答即時聯動地圖自動平移縮放與個人化收藏管理</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 核心章節詳細內容 -->
+            <article class="lg:col-span-2 order-2 lg:order-2 space-y-12">
+
+                <!-- 章節 1：專案背景與痛點 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-mono">01</span>
+                        <span>專案背景與核心挑戰 (Context & Problem)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            現代使用者在搜尋美食時，往往面臨傳統地圖評分膨脹、關鍵字篩選死板（難以理解複雜語義如「適合多人聚餐、安靜且預算五百內的平價火鍋」）以及在聊天機器人文字與地理地圖之間反覆切換的破碎體驗。
+                        </p>
+                        <p>
+                            本專案目標是打造一個**全端整合、具備語意理解力與無縫地圖互動**的智慧餐廳推薦系統，讓使用者能直接以口語對話，即時獲得附帶評分、推薦原因、位置標記的結構化清單。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 章節 2：系統架構與技術方案 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-mono">02</span>
+                        <span>系統架構與工程設計 (System Architecture)</span>
+                    </h2>
+                    <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
+                        <p>
+                            全系統採標準 AWS 雲端無伺服器微服務架構，兼顧低延遲與高擴充彈性：
+                        </p>
+                        <div class="bg-slate-100 dark:bg-slate-900/80 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 font-mono text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-3">
+                            <div class="text-blue-400 font-bold">// 完整雲端數據與互動流向</div>
+                            <div>• <strong>前端託管</strong>：S3 儲存靜態檔案，經由 CloudFront CDN 提供全球低延遲 HTTPS 存取。</div>
+                            <div>• <strong>API 通訊</strong>：Client 發送 RESTful 請求至 AWS API Gateway，由 Lambda 進行後端運算。</div>
+                            <div>• <strong>智慧推理</strong>：Lambda 透過 boto3 調用 Amazon Bedrock (Nova Micro Model)，結合 Google Places API 資訊進行動態 Prompt 生成與語意排序。</div>
+                            <div>• <strong>資料快取與推播</strong>：餐廳資訊快取於 Amazon DynamoDB；週報與通知由 Amazon EventBridge 定時觸發 SNS 與 SES。</div>
+                            <div>• <strong>前端地圖呈現</strong>：Google Maps JavaScript API 載入向量地圖，依據推薦結果動態繪製 Markers。</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 3：關鍵亮點與功能特色 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-mono">03</span>
+                        <span>關鍵功能與工程亮點 (Key Highlights)</span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-map-location-dot text-blue-400 text-sm"></i>
+                                <span>雙向聯動互動地圖</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                使用者在對話框點選特定餐廳，地圖即時自動平移並聚焦（panTo & zoomIn）；反之，點擊地圖上的 Marker 也會同步高亮側邊欄的推薦理由。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-brain text-purple-400 text-sm"></i>
+                                <span>Bedrock 語意分析推薦</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                結合 Amazon Bedrock Nova Micro 模型，精準理解使用者輸入的模糊情境（如「聚餐」、「氣氛好」、「咖啡好喝」），提供量身訂做的推薦理由。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-heart text-rose-400 text-sm"></i>
+                                <span>個人化收藏與偏好記錄</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                支援即時收藏餐廳、自訂標籤分類，並在下次推薦時作為 Context 輸入給 LLM，讓模型推薦越用越準確。
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-envelope-open-text text-amber-400 text-sm"></i>
+                                <span>自動化熱門週報推播</span>
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                結合 EventBridge、SNS 與 SES，定時發送個人化周遭熱門餐廳探索清單，建立完整的用戶喚醒與回訪閉環。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 章節 4：具體成效與數據驗證 -->
+                <section class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-mono">04</span>
+                        <span>成效指標與量化表現 (Impact & Verification)</span>
+                    </h2>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">高可靠且成本優化的 Serverless 架構：</strong>
+                                全站無常駐 EC2 伺服器，依靠 Lambda 與 DynamoDB 按量計費，在無流量時維持零運算成本。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 dark:text-white">極致流暢的前端互動體驗：</strong>
+                                藉由 CloudFront CDN 快取與輕量化的純前端 JavaScript 介面，靜態資源載入時間在 300ms 內完成。
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                
+
+            </article>
+
+        </div>
+
+    </main>
+
+        <!-- 頁尾 -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-950 text-center text-xs text-slate-500 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            © 2026 Anita Li (李舲熏). All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- 懸浮返回頂部按鈕 -->
+    <button id="scroll-to-top" type="button"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none focus:outline-none hover:scale-105"
+            title="返回頂部" aria-label="返回頂部">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+
+    <!-- 主題切換腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateThemeIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            if (themeToggleBtn) {
+                            // 懸浮返回頂部按鈕邏輯
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        scrollToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+                updateThemeIcons();
+                themeToggleBtn.addEventListener('click', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    updateThemeIcons();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
